@@ -23,8 +23,8 @@ form{
   margin-right: auto;
   }
 
-textarea{
-  resize: none;
+#tweet{
+  height: auto;
 }
 
 ul{

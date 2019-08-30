@@ -1,79 +1,54 @@
-
-
-document.getElementById('button').addEventListener("click", newTweet)
-document.getElementById('button').addEventListener("click", clean)
-
-
-// let tweetHistory
 // let hour = [];
 // let d = new Date();
 // let time = String(d.getHours()) + ":" + d.getMinutes();
+let tweet = document.getElementById('textarea');
+let btn = document.getElementById("button");
+let cont = document.getElementById('contagem');
+
+btn.addEventListener("click", newTweet)
+btn.addEventListener("click", clean)
+
+tweet.onkeyup = function () {contagem()}
+tweet.addEventListener("input", disable);   // event input
+tweet.dispatchEvent(new Event('input'));
 
 let history = [];
 let historico;
 
-// estudar:
-let textarea = document.getElementById('tweet');
-let btn = document.getElementById("button");
+cont.innerHTML = 140;
 
-let onBriefingInput = function (event) {
-  btn.disabled = !event.target.value;
+function disable () {
+  if (tweet.value.trim() == "") {
+    btn.disabled = true;
+  } else {
+    btn.disabled = !event.target.value; // estudar
+  }
 }
-
-tweet.addEventListener("input", onBriefingInput);
-tweet.dispatchEvent(new Event('input'));
-// estudar até aqui
 
 if(!localStorage.getItem("tweet")) {
   historico = [];
-  // start();
   console.log('inicio sem historico');
 } else {
   console.log('inicio tem historico');
   print();
 }
 
-// function button() {
-// document.getElementById('button').disabled = true;
-// }
+function contagem() {
+  cont.innerHTML = (140 - tweet.value.length);
+}
 
 function newTweet() {
-
   history = historico;
-  if (textarea.value == " ") {
-    print();
-  } else {
-    history.unshift(document.getElementById('tweet').value);     // adiciona na array o input
-    console.log(history);
+  // if (tweet.value == " ") {
+  //   print();
+  // } else {
+    history.unshift(tweet.value);     // adiciona na array o input
     historyJSON = JSON.stringify(history);        // transforma a array em obj JSON
     localStorage.setItem('tweet', historyJSON);
 
     print();
-  }
+  // }
 }
-
-// function tweet () {
-//
-//   if(tweetHistory == null) {
-//     tweetHistory = [];
-//     console.log('tweetHistory null');
-//
-//   } else {
-//     tweetHistory = JSON.parse(localStorage.getItem('tweet')); // a array recupera oq está no localStorage;
-//     console.log('tweetHistory JSON');
-//     }
-//
-//   tweetHistory.unshift(document.getElementById('tweet').value); // adiciona na array
-//   // hour.push(time);
-//   let tweetHistoryJSON = JSON.stringify(tweetHistory); // transforma a array em obj JSON
-//
-//   localStorage.setItem('tweet', tweetHistoryJSON);  // coloca no localStorage a array obj JSON
-//   // localStorage.setItem('hour', time);
-//   console.log(localStorage);
-//   // console.log(hour)
-// print();
-// }
-//
 
 function print() {
   historico = JSON.parse(localStorage.getItem('tweet')); // recupera oq está no localStorage(JSON) e transf. em array;
