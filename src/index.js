@@ -1,29 +1,38 @@
 // let hour = [];
 // let d = new Date();
 // let time = String(d.getHours()) + ":" + d.getMinutes();
-let tweet = document.getElementById('textarea');
-let btn = document.getElementById("button");
-let cont = document.getElementById('contagem');
-
-btn.addEventListener("click", newTweet)
-btn.addEventListener("click", clean)
-
-tweet.onkeyup = function () {contagem()}
-tweet.addEventListener("input", disable);   // event input
-tweet.dispatchEvent(new Event('input'));
+const tweet = document.getElementById('textarea');
+const btn = document.getElementById("button");
+const cont = document.getElementById('contagem');
 
 let history = [];
 let historico;
 
 cont.innerHTML = 140;
 
+btn.addEventListener("click", newTweet)
+btn.addEventListener("click", clean)
+
+tweet.onkeypress = function () {contagem()}   // keypress não funciona com o backspace!!!
+tweet.onkeydown = function () {contagem()}   // para quando for apagar
+tweet.addEventListener("input", disable);   // event input
+tweet.dispatchEvent(new Event('input'));
+
 function disable () {
-  if (tweet.value.trim() == "") {
+  if (event.target.value.trim() == "" || event.target.value.length > 140 ) {
     btn.disabled = true;
   } else {
-    btn.disabled = !event.target.value; // estudar
+    btn.disabled = false;
   }
 }
+
+// function disable () {
+//   if (tweet.value.trim() == "") {
+//     btn.disabled = true;
+//   } else {
+//     btn.disabled = !event.target.value; // estudar
+//   }
+// }
 
 if(!localStorage.getItem("tweet")) {
   historico = [];
@@ -46,6 +55,7 @@ function newTweet() {
     historyJSON = JSON.stringify(history);        // transforma a array em obj JSON
     localStorage.setItem('tweet', historyJSON);
 
+    cont.innerHTML = 140;
     print();
   // }
 }

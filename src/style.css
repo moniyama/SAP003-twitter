@@ -1,37 +1,41 @@
-body{
+body {
   background-image: url("wall.jpg");
 }
-h1{
+h1 {
   background: lightblue;
   text-align: center;
   color: white;
 }
 
-div.start{
+div.start {
   display: flex;
   padding: 50px;
 }
 
-div#personal{
+div#personal {
   height: 50%;
   width: 50%;
   background-color: white;
 }
 
-form{
+form {
   margin-left: auto;
   margin-right: auto;
-  }
-
-#tweet{
-  height: auto;
 }
 
-ul{
+textarea {
+  resize: none;
+}
+
+div#historico {
+  white-space: pre;
+}
+
+ul {
   list-style: none;
 }
 
-li{
+li {
   margin: 10px 50px 0 0;
   padding: 10px;
   background: white;
