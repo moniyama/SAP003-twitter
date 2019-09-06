@@ -7,21 +7,27 @@
   <title>Twitter</title>
 </head>
 <body>
-  <h1>TWITTER</h1>
-  <div class="start">
-    <div id = "personal">a</div>
-
+  <header>
+    <h1>TWITTER</h1>
+  </header>
+<main>
+<header class = "perfil-tweet">
+  <section class="profile" id = "personal">
+    <h2>Meu Nome</h2>
+    <p>Sou dev!</p>
+  </section>
+  <section class="tweet">
     <form id="form" action="index.html" method="post">
-      <div class="tweet">
         <textarea type="text" id="textarea" rows="8" cols="50" placeholder="O que você esta pensando?" required></textarea>
-        <br><span id="contagem"></span>  <button type="button" id="button">TWEET</button>
-      </div>
+<section class = 'btn'>
+  <button type="button" id="button">TWEET</button>
+  <p id="contagem">140</p>
+</section>
     </form>
-  </div>
-
-  <div id="historico">
-
-  </div>
+  </section>
+</header>
+  <section class = "historico" id="historico"></section>
+</main>
   <script src="index.js" charset="utf-8"></script>
 </body>
 </html>

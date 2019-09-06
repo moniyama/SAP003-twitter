@@ -7,28 +7,39 @@ h1 {
   color: white;
 }
 
-div.start {
-  display: flex;
-  padding: 50px;
-}
+.profile {
 
-div#personal {
-  height: 50%;
-  width: 50%;
+  padding: 10px;
+  width: 45%;
   background-color: white;
 }
 
-form {
+.tweet {
+  background-color: white;
+  width: 40%;
+
+}
+
+.perfil-tweet {
+  display: flex;
+  justify-content:space-around;
+  /* align-content: center; */
   margin-left: auto;
   margin-right: auto;
 }
-
-textarea {
-  resize: none;
+.btn {
+  display: flex;
+  justify-content:space-between;
+  margin: 10px;
 }
 
-div#historico {
-  white-space: pre;
+textarea {
+ resize: none;
+ width: 99%;
+}
+
+.historico {
+  white-space: pre-wrap;
 }
 
 ul {

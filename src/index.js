@@ -8,31 +8,9 @@ const cont = document.getElementById('contagem');
 let history = [];
 let historico;
 
-cont.innerHTML = 140;
-
-btn.addEventListener("click", newTweet)
-btn.addEventListener("click", clean)
-
-tweet.onkeypress = function () {contagem()}   // keypress não funciona com o backspace!!!
-tweet.onkeydown = function () {contagem()}   // para quando for apagar
-tweet.addEventListener("input", disable);   // event input
-tweet.dispatchEvent(new Event('input'));
-
-function disable () {
-  if (event.target.value.trim() == "" || event.target.value.length > 140 ) {
-    btn.disabled = true;
-  } else {
-    btn.disabled = false;
-  }
-}
-
-// function disable () {
-//   if (tweet.value.trim() == "") {
-//     btn.disabled = true;
-//   } else {
-//     btn.disabled = !event.target.value; // estudar
-//   }
-// }
+btn.addEventListener("click", newTweet);
+tweet.addEventListener("input", contagem);   // event input - para input ou textarea; similar a onchange event
+// tweet.dispatchEvent(new Event('input'));    // ?????????????
 
 if(!localStorage.getItem("tweet")) {
   historico = [];
@@ -42,23 +20,20 @@ if(!localStorage.getItem("tweet")) {
   print();
 }
 
-function contagem() {
-  cont.innerHTML = (140 - tweet.value.length);
-}
-
 function newTweet() {
   history = historico;
   // if (tweet.value == " ") {
   //   print();
   // } else {
-    history.unshift(tweet.value);     // adiciona na array o input
-    historyJSON = JSON.stringify(history);        // transforma a array em obj JSON
-    localStorage.setItem('tweet', historyJSON);
+  history.unshift(tweet.value);     // adiciona na array o input
+  historyJSON = JSON.stringify(history);        // transforma a array em obj JSON
+  localStorage.setItem('tweet', historyJSON);
 
-    cont.innerHTML = 140;
-    print();
-  // }
+  document.getElementById('form').reset();
+  cont.innerHTML = 140;
+  print();
 }
+  // }
 
 function print() {
   historico = JSON.parse(localStorage.getItem('tweet')); // recupera oq está no localStorage(JSON) e transf. em array;
@@ -69,10 +44,15 @@ function print() {
   document.getElementById('historico').innerHTML =
   `<ul> ${historyPrint} </ul> `
 
-    btn.disabled = true;
-
+  btn.disabled = true;
 }
 
-function clean () {
-  document.getElementById('form').reset();
+function contagem() {
+  let text = event.target.value;
+  cont.innerHTML = (140 - text.length);
+  if (text.trim() == "" || text.length > 140 ) {
+    btn.disabled = true;
+  } else {
+      btn.disabled = false;
+  }
 }
